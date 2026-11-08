@@ -145,7 +145,12 @@ record in `docs/IMPLEMENTATION_PROGRESS.md`.
 
 ## Deploying
 
-Built for Vercel; any static-capable Node host works.
+Built for Vercel; any Node host that can run `next start` works.
+Node **>= 20.9** (`engines` in `package.json`, `.nvmrc` pins the major).
+
+Every push runs `.github/workflows/ci.yml`: `npm ci`, lint, `tsc --noEmit`,
+then `next build`. `npm ci` installs the committed lockfile exactly, so CI
+cannot pass on a dependency tree the repository does not describe.
 
 ```bash
 npx vercel --prod
@@ -159,6 +164,22 @@ npx vercel --prod
 
 `site.url` in `src/lib/site.ts` is the canonical origin used for metadata, the
 sitemap and JSON-LD — change it if the domain changes.
+
+### Generated at build time
+
+No image files are committed apart from the résumé PDF. These are all rendered
+by `next/og` and served as static PNGs:
+
+| Route | Size | Purpose |
+|---|---|---|
+| `/icon` | 64×64 | Favicon |
+| `/apple-icon` | 180×180 | iOS home screen |
+| `/opengraph-image` | 1200×630 | Social card for the home page |
+| `/work/[slug]/opengraph-image` | 1200×630 | Per-project social card |
+| `/manifest.webmanifest` | — | Web app manifest |
+| `/sitemap.xml`, `/robots.txt` | — | Crawling |
+
+Licensed MIT — see `LICENSE`.
 
 ## Documentation
 

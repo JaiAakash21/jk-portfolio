@@ -20,6 +20,7 @@ build (`next build` → `next start`), not the dev server.
 | Performance & SEO | Done | Lighthouse 98–99 / 100 / 100 / 100 (home); 100 across the board on case studies |
 | Visual refinement | Done | Three passes, below |
 | Docs | Done | This file, `DESIGN_RESEARCH.md`, `README.md` |
+| Deploy readiness | Done | Manifest, apple-touch icon, Node pin, CI workflow, licence |
 
 ## Repository audit findings
 
@@ -58,6 +59,9 @@ build (`next build` → `next start`), not the dev server.
 | 14 | `.hover-line` touch fallback underlined display-size project titles | Fallback removed; affordance comes from context and ↗ / → glyphs |
 | 15 | WebGL `<canvas>` was in the DOM even when the layer was skipped | Element no longer rendered at all when disabled |
 | 16 | Schematic labels illegible at 390px (10px type at ~0.6 scale) | Plate typography scaled up ~20% |
+| 17 | `next dev` regenerated `AGENTS.md` at the repo root on every start | Disabled with `agentRules: false` |
+| 18 | Page did not hydrate under `next dev` in the cloud sandbox — no canvas, frozen clock — because the Turbopack HMR WebSocket could not complete its handshake through the proxy | Environment-specific, not an application fault: the production build hydrates correctly in the same browser. Previews are served from `next start` |
+| 19 | No iOS home-screen icon, no web manifest, no Node version pin, no CI | Added `apple-icon` (180×180), `manifest.ts`, `.nvmrc` + `engines`, and a lint/typecheck/build workflow |
 
 ## Tests performed
 
