@@ -91,6 +91,57 @@ Performance on the home route measured 98 and 99 across runs; the variance is
 the WebGL hero's first frames against a headless software renderer. Both figures
 are recorded rather than only the better one.
 
+## Information and assets still needed
+
+Nothing here blocks the site — it is live-ready as built. These are points where
+a decision or an asset from Jai Aakash would make it more accurate or better.
+
+### Conflicts resolved by picking a source — please confirm
+
+| Field | Used | Also found | Source chosen |
+|---|---|---|---|
+| Email | `jaiaakashs21@gmail.com` | `keshvajaiaakash@gmail.com` on the previous site | CV and brief agree |
+| LinkedIn | `linkedin.com/in/jaiaakash21/` | `linkedin.com/in/jai-aakash-s-487362330` on the previous site | CV and brief agree |
+
+Both old values are still live on jaiaakash.xyz. If the old ones are current,
+change them in `src/lib/site.ts`.
+
+### Unverified items
+
+- **"Hackazards"** — the brief lists project 4 as "Hackazards / InfraMind".
+  InfraMind is documented from the CV and is included. *Hackazards* appears in
+  no repository, in the CV, or on the previous site, so nothing was written
+  about it. If it is a hackathon InfraMind was built at, or a separate project,
+  send the detail and it can be added.
+- **Campus Energy Consumption Tracker** — described in the brief only (Zoho
+  Creator, energy monitoring, automated workflows, AI-assisted complaint
+  analysis, API integration). No repository exists, so it is listed under
+  "Also built" with no link and no elaboration beyond the brief's wording.
+
+### Assets that would improve the site
+
+- **Project screenshots or short screen recordings.** Every project is currently
+  represented by an original architecture schematic, which is honest but
+  abstract. Real UI from Offline-First Notes, CheckMate, CampusFix or the
+  CrimeLens dashboard would strengthen the work section considerably.
+- **A photograph.** There is no portrait anywhere. The About section and the
+  Open Graph card are purely typographic. That is a deliberate, coherent
+  choice — but a good photo is an option.
+- **A live demo URL for CrimeLens AI.** The repository has no homepage set.
+  Offline-First Notes and CampusFix both have live links and they carry weight.
+- **Deployed URLs for CheckMate and ROAD SAS**, if either is hosted anywhere.
+
+### Housekeeping
+
+- `public/JaiAakash_S_Resume.pdf` is the copy supplied on 8 Nov 2026. It will go
+  stale; replace the file at that path to update the download.
+- `site.url` in `src/lib/site.ts` is `https://jaiaakash.xyz` and drives the
+  canonical URL, sitemap and JSON-LD. It must change if the domain does.
+- No analytics are installed. This was not requested and none were added.
+- The availability line ("Open to Software / Backend Engineering internships")
+  is shown in the hero and is a claim with a shelf life — remove it from
+  `site.availability` once it stops being true.
+
 ## Known limitations
 
 - Schematic diagrams are dense at 360–390px. They are supporting visuals and

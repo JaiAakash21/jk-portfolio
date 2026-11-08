@@ -166,4 +166,5 @@ sitemap and JSON-LD — change it if the domain changes.
   three galleries and five live portfolios, and the reasoning behind the
   direction.
 - [`docs/IMPLEMENTATION_PROGRESS.md`](docs/IMPLEMENTATION_PROGRESS.md) — phase
-  status, every issue found and resolved, and the full test record.
+  status, every issue found and resolved, the full test record, and the list of
+  information and assets still outstanding.
