@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
 
+  // `next dev` otherwise regenerates an AGENTS.md at the repo root on every
+  // start, which shows up as an untracked file after any dev session.
+  agentRules: false,
+
   async headers() {
     return [
       {
