@@ -16,7 +16,7 @@ export default function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <Link href="/" className="display block text-[clamp(2.25rem,5vw,3.25rem)] leading-none">
-              Jai Aakash<span className="text-accent">.</span>
+              Jai Aakash S<span className="text-accent">.</span>
             </Link>
             <p className="mt-4 max-w-[30ch] text-[0.9375rem] text-fg-muted">
               {site.role} · {site.location}
@@ -36,6 +36,11 @@ export default function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/work" className="hover-line inline-block py-1.5 text-[0.9375rem] text-fg-muted hover:text-fg">
+                  All work
+                </Link>
+              </li>
             </ul>
           </nav>
 

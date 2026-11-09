@@ -15,7 +15,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "Python", level: "core" },
       { name: "JavaScript", level: "core" },
       { name: "TypeScript", level: "core" },
-      { name: "Java", level: "working" },
+      { name: "Java", level: "core" },
       { name: "SQL", level: "working" },
       { name: "C++", level: "working" },
       { name: "Dart", level: "working" },
@@ -26,14 +26,18 @@ export const skillGroups: SkillGroup[] = [
     id: "backend",
     label: "Backend",
     items: [
+      { name: "Spring Boot", level: "core" },
       { name: "FastAPI", level: "core" },
       { name: "REST API design", level: "core" },
       { name: "Pydantic", level: "core" },
+      { name: "JWT auth", level: "core" },
+      { name: "Spring Security", level: "working" },
+      { name: "Spring Data JPA", level: "working" },
+      { name: "Apache Kafka", level: "working" },
+      { name: "Redis", level: "working" },
       { name: "Node.js", level: "working" },
       { name: "Express", level: "working" },
       { name: "Socket.IO", level: "working" },
-      { name: "JWT auth", level: "working" },
-      { name: "Spring Boot", level: "learning" },
     ],
   },
   {
@@ -53,13 +57,14 @@ export const skillGroups: SkillGroup[] = [
     id: "data",
     label: "Data",
     items: [
+      { name: "PostgreSQL", level: "core" },
       { name: "SQLite", level: "core" },
+      { name: "SQL schema design", level: "core" },
+      { name: "Flyway migrations", level: "working" },
       { name: "MySQL", level: "working" },
       { name: "IndexedDB", level: "working" },
       { name: "Supabase", level: "working" },
-      { name: "PostgreSQL", level: "working" },
       { name: "MongoDB", level: "learning" },
-      { name: "Firebase", level: "learning" },
     ],
   },
   {
@@ -80,11 +85,26 @@ export const skillGroups: SkillGroup[] = [
     label: "Tools & platforms",
     items: [
       { name: "Git / GitHub", level: "core" },
+      { name: "Docker / Compose", level: "core" },
       { name: "Postman", level: "core" },
+      { name: "GitHub Actions", level: "working" },
       { name: "Vercel", level: "working" },
-      { name: "Docker", level: "working" },
       { name: "Render", level: "working" },
       { name: "Mapbox", level: "working" },
+    ],
+  },
+  {
+    id: "ops",
+    label: "Reliability & observability",
+    items: [
+      { name: "Testcontainers", level: "working" },
+      { name: "JUnit 5", level: "working" },
+      { name: "pytest", level: "working" },
+      { name: "Playwright", level: "working" },
+      { name: "Prometheus", level: "working" },
+      { name: "Grafana", level: "working" },
+      { name: "OpenTelemetry", level: "working" },
+      { name: "k6 load testing", level: "learning" },
     ],
   },
   {
@@ -93,10 +113,12 @@ export const skillGroups: SkillGroup[] = [
     items: [
       { name: "Data structures & algorithms", level: "core" },
       { name: "OOP", level: "core" },
+      { name: "Concurrency control", level: "working" },
+      { name: "Distributed systems", level: "working" },
       { name: "DBMS", level: "working" },
       { name: "Operating systems", level: "working" },
       { name: "Computer networks", level: "working" },
-      { name: "System design", level: "learning" },
+      { name: "System design", level: "working" },
     ],
   },
 ];
@@ -165,6 +187,11 @@ export const timeline: TimelineEntry[] = [
 
 export const achievements = [
   {
+    title: "RelayForge — 213 automated tests, green from a clean build",
+    detail:
+      "180 unit, 33 Testcontainers integration and 21 Playwright end-to-end tests over a webhook delivery platform. Thirteen real defects were found by running the system rather than reading it.",
+  },
+  {
     title: "AI Nexus Hackathon — Finalist",
     detail: "Presented CrimeLens AI, a platform for predictive urban safety and crime intelligence.",
   },
@@ -187,7 +214,8 @@ export const beyondCode = [
 
 /** Current focus. Kept short and updated by hand. */
 export const nowFocus = [
-  "Deepening backend fundamentals — Spring Boot, Express, MongoDB aggregation",
+  "Load-testing RelayForge with k6 and publishing the numbers rather than estimating them",
+  "Distributed-systems fundamentals — idempotency, backpressure, consensus",
   "Turning hackathon builds into production-grade repositories",
   "Daily DSA practice",
   "First open-source contributions",

@@ -58,6 +58,113 @@ function Tag({ x, y, children, accent }: { x: number; y: number; children: strin
   );
 }
 
+/* ---------------------------------------------------------------- 00 relay */
+function RelayPlate() {
+  // Attempt gaps widen: the backoff schedule is the point of the drawing.
+  const attempts = [
+    { x: 0, code: "500", ok: false },
+    { x: 86, code: "500", ok: false },
+    { x: 212, code: "200", ok: true },
+  ];
+  return (
+    <Frame label="one transaction into an outbox, relayed through Kafka to workers that retry with widening backoff">
+      {/* Nudged down: the plate is cropped to 2:1 on wide case-study layouts. */}
+      <g transform="translate(0,14)">
+        <Tag x={32} y={44}>POST /events</Tag>
+
+        {/* one transaction: events -> deliveries -> outbox */}
+        <rect x="32" y="56" width="188" height="110" rx="10" fill="var(--bg)" stroke={S.accent} strokeOpacity="0.55" />
+        <text x="46" y="78" style={{ ...mono, fontSize: 10.5 }} fill={S.accent}>ONE TRANSACTION</text>
+        {["events", "deliveries", "outbox"].map((t, i) => (
+          <g key={t}>
+            <rect x="46" y={88 + i * 24} width="160" height="18" rx="4" fill="var(--bg-raised)" stroke={S.faint} />
+            <circle cx="58" cy={97 + i * 24} r="3" fill={S.accent} opacity={0.9 - i * 0.2} />
+            <text x="70" y={101 + i * 24} style={{ ...mono, fontSize: 10 }} fill={S.muted}>{t}</text>
+          </g>
+        ))}
+        <Tag x={32} y={184} accent>commit → 202 accepted</Tag>
+
+        {/* relay: outbox publisher -> kafka */}
+        <path d="M220 103 H258" stroke={S.rule} strokeWidth="1.5" />
+        <g transform="translate(258,66)">
+          <rect width="104" height="74" rx="8" fill="var(--bg)" stroke={S.rule} />
+          <text x="52" y="30" style={{ ...mono, fontSize: 10 }} fill={S.fg} textAnchor="middle">OUTBOX</text>
+          <text x="52" y="46" style={{ ...mono, fontSize: 9 }} fill={S.muted} textAnchor="middle">SKIP LOCKED</text>
+          <text x="52" y="62" style={{ ...mono, fontSize: 9 }} fill={S.muted} textAnchor="middle">awaits ack</text>
+        </g>
+        <path d="M362 103 H404" stroke={S.accent} strokeWidth="2" strokeDasharray="6 6" className="plate-dash" />
+        <path d="M398 98 l8 5 -8 5" fill="none" stroke={S.accent} strokeWidth="2" />
+
+        {/* kafka partitions by endpoint */}
+        <g transform="translate(406,56)">
+          <rect width="88" height="94" rx="8" fill="var(--bg)" stroke={S.rule} />
+          <text x="44" y="24" style={{ ...mono, fontSize: 10 }} fill={S.fg} textAnchor="middle">KAFKA</text>
+          {[0, 1, 2].map((i) => (
+            <g key={i}>
+              <rect x="12" y={36 + i * 20} width="64" height="12" rx="3" fill={S.muted} opacity={0.18} />
+              <rect x="12" y={36 + i * 20} width={26 + i * 16} height="12" rx="3" fill={S.accent} opacity={0.5 - i * 0.12} />
+            </g>
+          ))}
+        </g>
+        <Tag x={406} y={168}>by endpoint</Tag>
+
+        {/* leased workers */}
+        <path d="M494 103 H534" stroke={S.rule} strokeWidth="1.5" />
+        {[0, 1].map((i) => (
+          <g key={i} transform={`translate(534,${64 + i * 46})`} className="plate-in" style={{ animationDelay: `${i * 0.4}s` }}>
+            <rect width="74" height="36" rx="7" fill="var(--bg)" stroke={i === 0 ? S.accent : S.faint} strokeOpacity={i === 0 ? 0.6 : 1} />
+            <circle cx="16" cy="18" r="4" fill={i === 0 ? S.accent : S.sage}
+              className={i === 0 ? "plate-pulse" : undefined} />
+            <text x="30" y="22" style={{ ...mono, fontSize: 9 }} fill={S.muted}>LEASE</text>
+          </g>
+        ))}
+        <Tag x={534} y={50}>workers</Tag>
+      </g>
+
+      {/* attempt timeline with widening gaps */}
+      <line x1="32" y1="214" x2="608" y2="214" stroke={S.rule} />
+      <Tag x={32} y={236}>Attempts · exponential backoff + jitter</Tag>
+
+      <line x1="56" y1="300" x2="576" y2="300" stroke={S.faint} />
+      {attempts.map((a, i) => {
+        const x = 70 + a.x * 1.7;
+        return (
+          <g key={i} className="plate-in" style={{ animationDelay: `${0.3 + i * 0.4}s` }}>
+            <line x1={x} y1="300" x2={x} y2="262" stroke={a.ok ? S.sage : S.accent} strokeWidth="2" />
+            <circle cx={x} cy="300" r="5" fill={a.ok ? S.sage : S.accent} />
+            <rect x={x - 22} y="242" width="44" height="18" rx="9" fill="var(--bg)"
+              stroke={a.ok ? S.sage : S.accent} strokeOpacity="0.6" />
+            <text x={x} y="255" style={{ ...mono, fontSize: 10 }} fill={a.ok ? S.sage : S.accent} textAnchor="middle">
+              {a.code}
+            </text>
+            {i < attempts.length - 1 && (
+              <>
+                <path d={`M${x + 8} 318 H${70 + attempts[i + 1].x * 1.7 - 8}`}
+                  stroke={S.muted} strokeWidth="1.2" strokeDasharray="3 4" opacity="0.7" />
+                <text x={(x + 70 + attempts[i + 1].x * 1.7) / 2} y="334"
+                  style={{ ...mono, fontSize: 9.5 }} fill={S.muted} textAnchor="middle">
+                  {["+6.7s", "+11.0s"][i]}
+                </text>
+              </>
+            )}
+          </g>
+        );
+      })}
+
+      {/* budget spent -> dead letter -> replay appends */}
+      <path d="M452 300 H520" stroke={S.faint} strokeDasharray="4 5" />
+      <g transform="translate(466,276)">
+        <rect width="142" height="48" rx="8" fill="var(--bg)" stroke={S.accent} strokeOpacity="0.5" />
+        <text x="14" y="20" style={{ ...mono, fontSize: 9.5 }} fill={S.accent}>DEAD LETTER</text>
+        <text x="14" y="36" style={{ ...mono, fontSize: 9 }} fill={S.muted}>replay appends</text>
+        <path d="M118 30 a10 10 0 1 0 10 -10" fill="none" stroke={S.accent} strokeWidth="1.5" />
+        <path d="M124 18 l4 2 -2 4" fill="none" stroke={S.accent} strokeWidth="1.5" />
+      </g>
+      <Tag x={32} y={356}>Postgres decides what must be delivered · Kafka only distributes it</Tag>
+    </Frame>
+  );
+}
+
 /* ---------------------------------------------------------------- 01 sync */
 function SyncPlate() {
   return (
@@ -424,6 +531,7 @@ function TicketsPlate() {
 }
 
 const PLATES: Record<PlateKind, () => React.ReactElement> = {
+  relay: RelayPlate,
   sync: SyncPlate,
   grid: GridPlate,
   incident: IncidentPlate,

@@ -14,7 +14,7 @@ export const site = {
   email: "jaiaakashs21@gmail.com",
   resumePath: "/JaiAakash_S_Resume.pdf",
   /** Short line used in <title>, OG and the JSON-LD description. */
-  tagline: "Computer Science student building backends and offline-first systems that keep working when the network does not.",
+  tagline: "Computer Science student building backends, delivery pipelines and offline-first systems that keep working when the network does not.",
   availability: "Open to Software / Backend Engineering internships",
 } as const;
 

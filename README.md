@@ -40,11 +40,12 @@ src/
 │   ├── opengraph-image.tsx     Generated social card
 │   ├── sitemap.ts / robots.ts
 │   ├── not-found.tsx
+│   ├── work/page.tsx           Work index — every project in one grid
 │   └── work/[slug]/            Case studies, one per project
 ├── components/
 │   ├── SiteHeader / SiteFooter Scroll-aware nav, footer
 │   ├── HeroField.tsx           Hand-written WebGL contour field
-│   ├── Plate.tsx               Eight original SVG architecture schematics
+│   ├── Plate.tsx               Nine original SVG architecture schematics
 │   ├── SmoothScroll.tsx        Lenis, wired into GSAP's ticker
 │   ├── Reveal / SplitReveal    Scroll-triggered entrances
 │   ├── Magnetic / ThemeToggle / ScrollProgress / InView
@@ -62,7 +63,9 @@ All copy lives in `src/lib/`. Nothing is hardcoded in components.
 
 - Add a project → append to `projects` in `src/lib/projects.ts`. A case study
   page, static params and an OG image are generated from it automatically. Pick
-  a `plate` from the eight schematic kinds, or add a new one in `Plate.tsx`.
+  a `plate` from the nine schematic kinds, or add a new one in `Plate.tsx`.
+  Optional fields — `role`, `metrics`, `shots`, `docs` — render a stat band, a
+  screenshot gallery and deep links into the project's own documentation.
 - Change skills → `skillGroups` in `src/lib/profile.ts`. Grades are `core`
   (multiple shipped projects), `working` (at least one), `learning`.
 - Replace the résumé → drop a new PDF at `public/JaiAakash_S_Resume.pdf`.
@@ -117,6 +120,11 @@ No product screenshots exist for most of these projects, and fake browser chrome
 would misrepresent them. Each project is drawn instead as an **original SVG
 schematic of its own architecture** — pure SVG, no images, CSS-only animation
 that pauses off-screen. They are labelled as schematics on the page.
+
+Where real screenshots do exist they are used as well, under their own heading
+and never in place of the schematic. RelayForge's four images in
+`public/work/relayforge/` were captured with Playwright against the running
+stack; every figure in them is data that pipeline actually produced.
 
 ## Contact
 

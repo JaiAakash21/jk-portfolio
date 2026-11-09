@@ -88,7 +88,7 @@ export default function Hero() {
             <span className="block overflow-hidden"><span data-hero="line" className="block">Jai</span></span>
             <span className="block overflow-hidden">
               <span data-hero="line" className="block">
-                Aakash<span className="text-accent">.</span>
+                Aakash S<span className="text-accent">.</span>
               </span>
             </span>
           </h1>
@@ -106,8 +106,8 @@ export default function Hero() {
           <div className="md:col-span-4 md:col-start-7">
             <p data-hero="copy" className="lead">
               I build systems that keep working when the network doesn&apos;t —
-              offline-first storage, real-time state, and APIs that explain
-              themselves.
+              delivery pipelines that never lose an event, offline-first storage,
+              and APIs that explain themselves.
             </p>
           </div>
 

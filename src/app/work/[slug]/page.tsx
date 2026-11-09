@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { projects, getProject } from "@/lib/projects";
@@ -50,8 +51,37 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
   const i = projects.findIndex((x) => x.slug === p.slug);
   const next = projects[(i + 1) % projects.length];
 
+  // Static, build-time constants — no user input reaches this string.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Work", item: `${site.url}/work` },
+          { "@type": "ListItem", position: 3, name: p.title, item: `${site.url}/work/${p.slug}` },
+        ],
+      },
+      {
+        "@type": p.repo ? "SoftwareSourceCode" : "CreativeWork",
+        name: p.title,
+        description: p.summary,
+        url: `${site.url}/work/${p.slug}`,
+        author: { "@type": "Person", name: site.name, url: site.url },
+        dateCreated: p.year,
+        ...(p.repo ? { codeRepository: p.repo } : {}),
+        ...(p.stack.length ? { programmingLanguage: p.stack } : {}),
+      },
+    ],
+  };
+
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Header */}
       <header className="ruled border-b border-rule pb-14 pt-28 md:pb-18 md:pt-36">
         <div className="shell relative">
@@ -68,6 +98,8 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
           <h1 className="display mt-5 max-w-[16ch] text-[length:var(--text-h1)] leading-[0.95]">{p.title}</h1>
 
           <p className="lead mt-8 max-w-[44ch]">{p.summary}</p>
+
+          {p.role && <p className="label mt-5">{p.role}</p>}
 
           <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
             {p.demo && (
@@ -91,8 +123,30 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
                 Source <span aria-hidden="true">↗</span>
               </a>
             )}
-            {p.note && <p className="label max-w-[36ch] leading-relaxed">{p.note}</p>}
           </div>
+
+          {p.note && (
+            <p className="mt-7 max-w-[62ch] border-l border-rule-strong pl-5 text-[0.875rem] leading-relaxed text-fg-muted">
+              {p.note}
+            </p>
+          )}
+
+          {p.docs && (
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-rule pt-5">
+              <span className="label">Written up in depth</span>
+              {p.docs.map((d) => (
+                <a
+                  key={d.href}
+                  href={d.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="label hover-line hover:text-fg"
+                >
+                  {d.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </header>
 
@@ -106,6 +160,20 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
         <p className="label mt-3">
           Schematic of the system — an original diagram, not a product screenshot.
         </p>
+
+        {p.metrics && (
+          <dl className="mt-10 grid gap-px overflow-hidden rounded-xl border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+            {p.metrics.map((m) => (
+              <div key={m.label} className="bg-bg p-6">
+                <dd className="tnum font-[family-name:var(--font-display)] text-[clamp(2rem,4vw,2.75rem)] leading-none text-accent">
+                  {m.value}
+                </dd>
+                <dt className="label mt-3 !text-fg">{m.label}</dt>
+                {m.note && <p className="mt-2 text-[0.8125rem] leading-relaxed text-fg-muted">{m.note}</p>}
+              </div>
+            ))}
+          </dl>
+        )}
       </div>
 
       {/* Body */}
@@ -178,6 +246,44 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
           </aside>
         </div>
       </div>
+
+      {/* Real screenshots, where they exist */}
+      {p.shots && (
+        <section aria-labelledby="shots-title" className="border-t border-rule">
+          <div className="shell relative py-16 md:py-20">
+            <div className="tick-rule pt-5">
+              <h2 id="shots-title" className="label">From the running system</h2>
+            </div>
+            <p className="mt-4 max-w-[52ch] text-[0.9375rem] leading-relaxed text-fg-muted">
+              Captured with Playwright against the live stack. Every figure visible is real
+              data the pipeline produced during that session — nothing is mocked.
+            </p>
+
+            <div className="mt-10 grid gap-10 md:grid-cols-2">
+              {p.shots.map((shot, si) => (
+                <Reveal key={shot.src} y={24}>
+                  <figure>
+                    <div className="overflow-hidden rounded-xl border border-rule bg-bg-raised">
+                      <Image
+                        src={shot.src}
+                        alt={shot.alt}
+                        width={shot.width}
+                        height={shot.height}
+                        sizes="(min-width: 768px) 46vw, 92vw"
+                        priority={si === 0}
+                        className="h-auto w-full"
+                      />
+                    </div>
+                    <figcaption className="mt-4 text-[0.8125rem] leading-relaxed text-fg-muted">
+                      {shot.caption}
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Next */}
       <nav aria-label="Next project" className="border-t border-rule">

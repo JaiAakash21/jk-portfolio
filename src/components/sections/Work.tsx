@@ -17,6 +17,12 @@ export default function Work() {
               title="Selected work"
               note="Projects that show how I approach a problem: find the failure case first, then build the system that survives it."
             />
+            <Reveal className="mt-6">
+              <Link href="/work" className="group/all inline-flex items-center gap-2 text-[0.875rem] text-fg">
+                <span className="hover-line">Browse every project</span>
+                <span aria-hidden="true" className="inline-block transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover/all:translate-x-1">→</span>
+              </Link>
+            </Reveal>
           </div>
           <Reveal className="md:col-span-4 md:col-start-9 md:self-end" stagger>
             <dl className="grid grid-cols-3 gap-4 border-t border-rule pt-5 md:grid-cols-1 md:gap-0 md:border-t-0">
@@ -124,7 +130,12 @@ export default function Work() {
       {/* Index of everything else */}
       <div className="shell relative mt-16 md:mt-24">
         <Reveal className="tick-rule pt-6">
-          <h3 className="display text-[length:var(--text-h3)]">Also built</h3>
+          <div className="flex flex-wrap items-baseline justify-between gap-4">
+            <h3 className="display text-[length:var(--text-h3)]">Also built</h3>
+            <Link href="/work" className="label hover-line hover:text-fg">
+              All work ↗
+            </Link>
+          </div>
         </Reveal>
 
         <Reveal className="mt-8" stagger>
