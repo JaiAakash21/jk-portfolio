@@ -187,9 +187,9 @@ export const timeline: TimelineEntry[] = [
 
 export const achievements = [
   {
-    title: "RelayForge — 213 automated tests, green from a clean build",
+    title: "RelayForge — 234 automated tests, green from a clean build",
     detail:
-      "180 unit, 33 Testcontainers integration and 21 Playwright end-to-end tests over a webhook delivery platform. Thirteen real defects were found by running the system rather than reading it.",
+      "180 unit, 33 Testcontainers integration and 21 Playwright end-to-end tests over a multi-tenant webhook delivery platform. Thirteen real defects were found by running the system rather than reading it.",
   },
   {
     title: "AI Nexus Hackathon — Finalist",

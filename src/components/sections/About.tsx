@@ -36,7 +36,7 @@ export default function About() {
               with typed contracts at every boundary. The largest of those is{" "}
               <span className="text-fg">RelayForge</span> — a multi-tenant webhook
               delivery platform on Java, Spring Boot, PostgreSQL, Kafka and Redis,
-              with 213 automated tests and its own reliability playground that
+              with 234 automated tests and its own reliability playground that
               injects real failures into the real pipeline.
             </p>
             <p className="mt-6 max-w-[58ch] text-[length:var(--text-body-lg)] leading-[1.68] text-fg-muted">

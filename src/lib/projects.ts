@@ -69,9 +69,9 @@ export const projects: Project[] = [
     solution:
       "PostgreSQL is the source of truth for what must be delivered; Kafka only distributes the work of delivering it, and never decides whether a delivery still needs doing. The event, its deliveries and the outbox rows commit in one transaction, so \"accepted\" and \"queued for relay\" are the same atomic fact. An outbox publisher claims rows with FOR UPDATE SKIP LOCKED and waits for the broker's acknowledgement. Workers take a renewable lease, sign the payload with HMAC-SHA256, and send it; the response is classified, and a retryable failure is rescheduled in the database with exponential backoff and symmetric jitter. When the attempt budget is spent the delivery becomes a dead letter that can be replayed — by appending attempts, never by resetting history.",
     contribution:
-      "Solo build, designed and implemented end to end: the Spring Boot backend and its three runtime roles, the outbox and retry engines, the lease reconciler, the security layer (HMAC signing, AES-GCM secret storage, DNS-pinned SSRF policy, refresh-token rotation), the Next.js dashboard with eleven screens and the Reliability Playground, and the Docker, Prometheus, Grafana and OpenTelemetry infrastructure. 213 automated tests pass from a clean build; thirteen real defects were found by running the system rather than reading it.",
+      "Solo build, designed and implemented end to end: the Spring Boot backend and its three runtime roles, the outbox and retry engines, the lease reconciler, the security layer (HMAC signing, AES-GCM secret storage, DNS-pinned SSRF policy, refresh-token rotation), the Next.js dashboard with eleven screens and the Reliability Playground, and the Docker, Prometheus, Grafana and OpenTelemetry infrastructure. 234 automated tests pass from a clean build — 180 unit, 33 Testcontainers integration and 21 Playwright end-to-end — and thirteen real defects were found by running the system rather than reading it.",
     metrics: [
-      { label: "Automated tests", value: "213", note: "180 unit · 33 Testcontainers integration · 21 Playwright E2E" },
+      { label: "Automated tests, all green", value: "234", note: "180 unit · 33 Testcontainers integration · 21 Playwright end-to-end" },
       { label: "Tracked files", value: "262", note: "Backend, dashboard, simulator, infra, docs" },
       { label: "Grafana panels", value: "19", note: "Plus Prometheus alerting rules" },
       { label: "Fault scenarios", value: "7", note: "Injectable from the dashboard, against the real pipeline" },
@@ -153,19 +153,19 @@ export const projects: Project[] = [
     shots: [
       {
         src: "/work/relayforge/playground-run.jpg",
-        width: 1000,
-        height: 960,
+        width: 1200,
+        height: 1116,
         alt: "A completed Reliability Playground run showing attempts returning 500, 500 then 200 with widening gaps",
         caption:
-          "A real run: HTTP 500, 500, 200, with the gap between attempts roughly doubling. The simulator's own counters (3 requests, 2 failed, 1 ok) agree with RelayForge's recorded attempt history, so the demonstration corroborates itself.",
+          "A real run of the \u201ctransient 500s, then recovery\u201d scenario: HTTP 500, 500, 200, with gaps of +6.9s then +13.0s. The simulator's own counters — 3 requests, 2 failed, 1 ok — agree with RelayForge's recorded attempt history, so the demonstration corroborates itself.",
       },
       {
         src: "/work/relayforge/delivery-detail.jpg",
-        width: 1000,
-        height: 738,
-        alt: "Delivery detail screen with a vertical timeline of individual delivery attempts",
+        width: 1200,
+        height: 1156,
+        alt: "Delivery detail screen with a timeline of four attempts: three 503 failures and a successful replay",
         caption:
-          "Every attempt is kept: status, classification, timing and response. A failed delivery is something you inspect, not something you infer.",
+          "The same delivery after it dead-lettered and was replayed: three 503s, then a 200 on the replay. The failures are still there. Replay appended attempt four rather than erasing the evidence of why the delivery failed in the first place.",
       },
       {
         src: "/work/relayforge/endpoints.jpg",
