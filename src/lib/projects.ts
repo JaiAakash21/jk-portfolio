@@ -10,6 +10,8 @@
  */
 
 export type Plate =
+  | "delivery"
+  | "review"
   | "sync"      // offline queue / sync timeline
   | "grid"      // hotspot density grid
   | "incident"  // incident triage pipeline
@@ -47,8 +49,38 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "relayforge", index: "01", title: "RelayForge", kind: "Event-driven infrastructure", year: "2026",
+    summary: "A webhook delivery service that accepts events during a Kafka outage and picks up the same deliveries after recovery.",
+    problem: "A client can get a successful response even when a broker fails before a webhook is queued. That leaves the receiver waiting for an event it will never see.",
+    solution: "The API commits the event, delivery and outbox row together in PostgreSQL. A publisher forwards pending outbox records to Kafka. Workers claim deliveries, sign webhook requests and record each attempt.",
+    contribution: "I built the delivery pipeline and verified its recovery path with real Kafka, PostgreSQL and Redis containers. I stopped Kafka, submitted an event and observed HTTP 202. After restart, the same delivery succeeded and the receiver counted one HTTP 200.",
+    architecture: ["Spring Boot API accepts the event", "PostgreSQL commits the event, delivery and outbox in one transaction", "Outbox publisher sends the message to Kafka", "Worker claims and signs the webhook", "Receiver response and attempt history are recorded"],
+    decisions: [
+      { title: "Keep acceptance durable", body: "The API acknowledges the database commit. Publishing can resume from the outbox when Kafka becomes available again." },
+      { title: "Test duplicate consumption", body: "I republished an outbox message after its delivery completed. A conditional SQL claim kept this test run to one outbound request and one attempt row." },
+    ],
+    features: ["Worker leases and stalled-delivery reconciliation", "Exponential backoff with jitter", "HMAC-SHA256 webhook signatures", "Dead-letter replay with attempt history"],
+    stack: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Redis", "Docker", "Testcontainers"],
+    plate: "delivery", repo: "https://github.com/JaiAakash21/RELAYFORGE", featured: true,
+  },
+  {
+    slug: "carebridge", index: "02", title: "CareBridge", kind: "Healthcare workflows · Acentra finals", year: "2026",
+    summary: "A discharge follow-up coordinator that turns instructions into tasks and holds flagged items for clinician review.",
+    problem: "A discharge instruction can require a provider match or clinical review before a follow-up task is ready to proceed.",
+    solution: "A Python workflow tracks each instruction through task creation, review and release. FastAPI exposes the transitions, Firestore stores their state and role checks limit who can approve a task.",
+    contribution: "I built the FastAPI backend scaffold, migrated workflow state to Firestore and wrote acceptance checks for the instruction lifecycle. My branch includes provider matching, role checks and append-only audit events.",
+    architecture: ["Intake receives discharge instructions", "Workflow creates follow-up tasks", "Flagged tasks wait for clinician approval", "Approved tasks proceed with an audit record"],
+    decisions: [
+      { title: "Make the review step explicit", body: "A flagged task stays on hold until an authorised reviewer approves it. The workflow records who made the transition." },
+      { title: "Check the whole lifecycle", body: "Acceptance checks exercise the sequence from instruction intake to task release, including the review hold." },
+    ],
+    features: ["Clinician review holds", "Role-based access checks", "Provider matching", "Append-only audit events"],
+    stack: ["Python", "FastAPI", "Firestore", "Firebase Authentication"],
+    plate: "review", note: "Team project for the Acentra finals. The source repository is private.", featured: true,
+  },
+  {
     slug: "offline-first-notes",
-    index: "01",
+    index: "03",
     title: "Offline-First Notes",
     kind: "PWA · Security",
     year: "2026",
@@ -103,12 +135,12 @@ export const projects: Project[] = [
     stack: ["JavaScript", "IndexedDB", "Service Workers", "Web Crypto API", "AES-GCM", "PBKDF2", "Background Sync", "PWA"],
     plate: "sync",
     repo: "https://github.com/JaiAakash21/Offline-First-App",
-    demo: "https://offline-first-app-seven.vercel.app",
-    featured: true,
+    demo: "https://offline-first-app-jk.vercel.app",
+    featured: false,
   },
   {
     slug: "crimelens-ai",
-    index: "02",
+    index: "04",
     title: "CrimeLens AI",
     kind: "Web + Mobile · AI",
     year: "2026",
@@ -156,11 +188,11 @@ export const projects: Project[] = [
     stack: ["Python", "FastAPI", "Supabase", "Next.js", "TypeScript", "React Native", "Expo", "Gemini", "OSRM", "pytest"],
     plate: "grid",
     repo: "https://github.com/JaiAakash21/crimelens-ai",
-    featured: true,
+    featured: false,
   },
   {
     slug: "inframind",
-    index: "03",
+    index: "05",
     title: "InfraMind",
     kind: "Internship · Backend",
     year: "2026",
@@ -174,8 +206,8 @@ export const projects: Project[] = [
       "Backend development intern. Built the backend services, the REST API surface, the AI-assisted postmortem module and the incident memory retrieval.",
     architecture: [
       "FastAPI service with Pydantic request/response models",
-      "SQLite persistence",
-      "10+ REST endpoints across incident management, RCA, reporting and health",
+      "SQLAlchemy with SQLite",
+      "REST endpoints across incident management, RCA, reporting and health",
       "LLM integration with prompt engineering for postmortem drafting",
       "Keyword / field-based incident memory for retrieving similar past incidents",
     ],
@@ -202,11 +234,11 @@ export const projects: Project[] = [
     stack: ["Python", "FastAPI", "SQLite", "Pydantic", "REST APIs", "LLM Integration", "Prompt Engineering", "Git"],
     plate: "incident",
     note: "Built during an internship at Zenvic Software Solutions Pvt. Ltd. The source is not public.",
-    featured: true,
+    featured: false,
   },
   {
     slug: "checkmate",
-    index: "04",
+    index: "06",
     title: "CheckMate",
     kind: "Real-time · Multiplayer",
     year: "2026",
@@ -249,11 +281,11 @@ export const projects: Project[] = [
     stack: ["React 19", "Vite", "Node.js", "Express", "Socket.IO", "chess.js", "Tailwind CSS", "Framer Motion"],
     plate: "board",
     repo: "https://github.com/JaiAakash21/CheckMate",
-    featured: true,
+    featured: false,
   },
   {
     slug: "road-sos",
-    index: "05",
+    index: "07",
     title: "ROAD SAS",
     kind: "Mobile · Offline-first",
     year: "2026",
@@ -295,11 +327,11 @@ export const projects: Project[] = [
     stack: ["Flutter", "Dart", "Riverpod", "Mapbox", "MBTiles", "SQLite", "geolocator", "sensors_plus"],
     plate: "route",
     repo: "https://github.com/JaiAakash21/road-sos",
-    featured: true,
+    featured: false,
   },
   {
     slug: "fraudlens",
-    index: "06",
+    index: "08",
     title: "FraudLens",
     kind: "Hackathon · Fintech",
     year: "2026",
@@ -309,7 +341,7 @@ export const projects: Project[] = [
       "A fraud model that outputs 0.91 and nothing else cannot be acted on, argued with, or audited. Reviewers need to know which rule fired and why.",
     solution:
       "A FastAPI rule engine scores transactions against named rules. Each score carries the rules that produced it, so the output is a reason, not just a number. Flagged transactions route to a React reviewer queue, and every decision is written to an audit trail.",
-    contribution: "Built for the Acentra 'Build to Care' hackathon as part of a team.",
+    contribution: "I integrated the team’s fraud engine with FastAPI and the React reviewer console. I mapped rule evidence into the API response and added tests for velocity, amount, geographic and multi-rule checks.",
     architecture: [
       "Transaction intake",
       "FastAPI rule engine evaluating named rules",
@@ -338,11 +370,11 @@ export const projects: Project[] = [
     stack: ["Python", "FastAPI", "React", "TypeScript", "Tailwind CSS"],
     plate: "rules",
     repo: "https://github.com/JaiAakash21/acentra-Goodfellas",
-    featured: false,
+    featured: true,
   },
   {
     slug: "industrial-defect-detection",
-    index: "07",
+    index: "09",
     title: "Industrial Defect Detection",
     kind: "Computer Vision",
     year: "2026",
@@ -392,7 +424,7 @@ export const projects: Project[] = [
   },
   {
     slug: "campusfix",
-    index: "08",
+    index: "10",
     title: "CampusFix",
     kind: "Full-stack · RBAC",
     year: "2026",
@@ -431,7 +463,6 @@ export const projects: Project[] = [
     stack: ["React 19", "Vite", "PHP 8.2", "MySQL", "Bootstrap 5", "Chart.js", "Apache"],
     plate: "tickets",
     repo: "https://github.com/JaiAakash21/Campusfix",
-    demo: "https://campusfix.free.nf/",
     featured: false,
   },
 ];

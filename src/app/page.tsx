@@ -11,8 +11,8 @@ export default function Home() {
     <>
       <ScrollProgress />
       <Hero />
-      <About />
       <Work />
+      <About />
       <Stack />
       <Experience />
       <Contact />

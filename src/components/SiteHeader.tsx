@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { nav, site, links } from "@/lib/site";
 import ThemeToggle from "./ThemeToggle";
@@ -17,6 +18,7 @@ export default function SiteHeader() {
   const [condensed, setCondensed] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -47,7 +49,7 @@ export default function SiteHeader() {
     );
     sections.forEach((s) => io.observe(s));
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
 
   // Mobile panel: scroll lock, Escape, and a simple focus trap.
   useEffect(() => {
@@ -72,43 +74,29 @@ export default function SiteHeader() {
     };
   }, [open]);
 
-  const activeLabel = nav.find((n) => n.href.endsWith(`#${active}`))?.label;
-
   return (
     <header
       data-condensed={condensed || undefined}
-      className="fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter] duration-500
+      className="fixed inset-x-0 top-0 z-50 bg-bg transition-[background-color,backdrop-filter] duration-500
                  data-condensed:border-b data-condensed:border-rule
                  data-condensed:bg-bg/72 data-condensed:backdrop-blur-xl"
     >
-      <div className="shell">
+      <div className="shell relative z-50">
         <div
           className="flex items-center justify-between transition-[padding] duration-500
                      py-5 data-condensed:py-3"
           data-condensed={condensed || undefined}
         >
           {/* Wordmark + live section read-out */}
-          <Link href="/" className="group -m-2 flex items-baseline gap-3 p-2">
-            <span className="font-mono text-[0.8125rem] font-medium tracking-[0.12em] text-fg">
-              {site.wordmark}
-            </span>
-            <span className="sr-only">{site.name} — home</span>
-            <span className="hidden h-3 w-px bg-rule-strong sm:block" aria-hidden="true" />
-            <span className="relative hidden overflow-hidden text-[0.8125rem] text-fg-muted sm:block">
-              <span
-                className="block transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)]"
-                style={{ transform: condensed && activeLabel ? "translateY(-100%)" : "translateY(0)" }}
-              >
-                <span className="block">{site.shortName}</span>
-                <span className="block text-accent">{activeLabel ?? ""}</span>
-              </span>
-            </span>
+          <Link href="/" className="group -m-2 flex items-center gap-3 p-2">
+            <span className="brand-mark" aria-hidden="true">{site.wordmark}</span>
+            <span className="brand-name">{site.shortName}<span className="sr-only"> — home</span></span>
           </Link>
 
           {/* Desktop nav */}
           <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
             {nav.map((item) => {
-              const isActive = item.href.endsWith(`#${active}`);
+              const isActive = pathname === "/" && item.href.endsWith(`#${active}`);
               return (
                 <Link
                   key={item.href}
@@ -166,7 +154,7 @@ export default function SiteHeader() {
         id="mobile-nav"
         ref={panelRef}
         hidden={!open}
-        className="fixed inset-0 top-0 z-40 flex flex-col bg-bg md:hidden"
+        className="fixed inset-0 top-0 z-40 flex h-dvh flex-col overflow-y-auto bg-bg md:hidden"
       >
         <div className="shell flex flex-1 flex-col justify-between pb-10 pt-24">
           <nav aria-label="Mobile" className="flex flex-col">

@@ -6,7 +6,7 @@ export default function Experience() {
   return (
     <section id="experience" className="section ruled border-t border-rule" aria-labelledby="exp-title">
       <div className="shell relative">
-        <SectionHead index="04" id="exp-title" title="Experience & education" />
+        <SectionHead id="exp-title" title="Experience & education" />
 
         <div className="mt-14 grid gap-14 md:mt-20 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-8">

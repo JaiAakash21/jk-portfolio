@@ -1,111 +1,11 @@
-/** Skills, experience, education and interests. Sourced from the CV and repositories. */
-
-export type SkillGroup = {
-  id: string;
-  label: string;
-  /** Honest framing — "shipped" means used in a project that exists. */
-  items: { name: string; level: "core" | "working" | "learning" }[];
-};
-
-export const skillGroups: SkillGroup[] = [
-  {
-    id: "languages",
-    label: "Languages",
-    items: [
-      { name: "Python", level: "core" },
-      { name: "JavaScript", level: "core" },
-      { name: "TypeScript", level: "core" },
-      { name: "Java", level: "working" },
-      { name: "SQL", level: "working" },
-      { name: "C++", level: "working" },
-      { name: "Dart", level: "working" },
-      { name: "PHP", level: "working" },
-    ],
-  },
-  {
-    id: "backend",
-    label: "Backend",
-    items: [
-      { name: "FastAPI", level: "core" },
-      { name: "REST API design", level: "core" },
-      { name: "Pydantic", level: "core" },
-      { name: "Node.js", level: "working" },
-      { name: "Express", level: "working" },
-      { name: "Socket.IO", level: "working" },
-      { name: "JWT auth", level: "working" },
-      { name: "Spring Boot", level: "learning" },
-    ],
-  },
-  {
-    id: "frontend",
-    label: "Frontend",
-    items: [
-      { name: "React", level: "core" },
-      { name: "Next.js", level: "core" },
-      { name: "Tailwind CSS", level: "core" },
-      { name: "HTML / CSS", level: "core" },
-      { name: "PWA / Service Workers", level: "working" },
-      { name: "Flutter", level: "working" },
-      { name: "Expo", level: "working" },
-    ],
-  },
-  {
-    id: "data",
-    label: "Data",
-    items: [
-      { name: "SQLite", level: "core" },
-      { name: "MySQL", level: "working" },
-      { name: "IndexedDB", level: "working" },
-      { name: "Supabase", level: "working" },
-      { name: "PostgreSQL", level: "working" },
-      { name: "MongoDB", level: "learning" },
-      { name: "Firebase", level: "learning" },
-    ],
-  },
-  {
-    id: "aiml",
-    label: "AI / ML",
-    items: [
-      { name: "PyTorch", level: "working" },
-      { name: "scikit-learn", level: "working" },
-      { name: "OpenCV", level: "working" },
-      { name: "Computer vision", level: "working" },
-      { name: "LLM integration", level: "working" },
-      { name: "Prompt engineering", level: "working" },
-      { name: "TensorFlow", level: "learning" },
-    ],
-  },
-  {
-    id: "tools",
-    label: "Tools & platforms",
-    items: [
-      { name: "Git / GitHub", level: "core" },
-      { name: "Postman", level: "core" },
-      { name: "Vercel", level: "working" },
-      { name: "Docker", level: "working" },
-      { name: "Render", level: "working" },
-      { name: "Mapbox", level: "working" },
-    ],
-  },
-  {
-    id: "cs",
-    label: "Computer science",
-    items: [
-      { name: "Data structures & algorithms", level: "core" },
-      { name: "OOP", level: "core" },
-      { name: "DBMS", level: "working" },
-      { name: "Operating systems", level: "working" },
-      { name: "Computer networks", level: "working" },
-      { name: "System design", level: "learning" },
-    ],
-  },
+/** Tools used in project work, internships and integration tests. */
+export const skillGroups = [
+  { label: "Languages", items: ["Java", "Python", "SQL", "TypeScript", "JavaScript"] },
+  { label: "Backend", items: ["Spring Boot", "FastAPI", "Pydantic", "SQLAlchemy", "Node.js", "Express"] },
+  { label: "Data & messaging", items: ["PostgreSQL", "Apache Kafka", "Redis", "Firestore", "SQLite", "MySQL"] },
+  { label: "Testing & delivery", items: ["Testcontainers", "JUnit", "pytest", "Playwright", "Docker", "GitHub Actions", "OpenTelemetry"] },
+  { label: "Interfaces", items: ["React", "Next.js", "React Native", "IndexedDB", "Service workers"] },
 ];
-
-export const levelCopy: Record<"core" | "working" | "learning", string> = {
-  core: "Used across multiple shipped projects",
-  working: "Used in at least one shipped project",
-  learning: "Currently learning",
-};
 
 export type TimelineEntry = {
   period: string;
@@ -123,9 +23,8 @@ export const timeline: TimelineEntry[] = [
     org: "Zenvic Software Solutions Pvt. Ltd.",
     kind: "work",
     detail: [
-      "Built backend services for InfraMind, an AI-driven infrastructure incident management platform, automating incident analysis and reducing manual triage effort by approximately 65%.",
-      "Designed and implemented 10+ REST APIs covering incident management, AI-powered root cause analysis, report generation and health monitoring.",
-      "Built an AI-assisted postmortem generation module using LLM integration and prompt engineering, plus a keyword/field-based incident memory that retrieved similar past incidents — cutting documentation time by approximately 70%.",
+      "Built FastAPI endpoints for incident intake, root cause analysis, reporting and health checks. Used Pydantic for validation and SQLAlchemy with SQLite for persistence.",
+      "Built an LLM-assisted postmortem generator that retrieves similar past incidents using keyword and field matching.",
     ],
     stack: ["Python", "FastAPI", "SQLite", "Pydantic", "REST APIs", "Git"],
   },
@@ -169,8 +68,8 @@ export const achievements = [
     detail: "Presented CrimeLens AI, a platform for predictive urban safety and crime intelligence.",
   },
   {
-    title: "250+ DSA problems solved",
-    detail: "Across LeetCode, GeeksforGeeks and HackerRank — arrays, strings, trees, graphs and dynamic programming.",
+    title: "Acentra hackathon finals",
+    detail: "Contributed backend workflows for CareBridge and integrated explainable risk scoring into FraudLens.",
   },
   {
     title: "School First in Class XI",
@@ -181,14 +80,6 @@ export const achievements = [
 export const beyondCode = [
   { title: "Chess", detail: "The reason CheckMate exists. Openings are just cached search." },
   { title: "Rubik's cube", detail: "Algorithms you execute with your hands." },
-  { title: "Competitive problem solving", detail: "A standing habit rather than a sprint — 250+ problems so far." },
+  { title: "Competitive problem solving", detail: "I practise data structures and algorithms in Java." },
   { title: "Reading systems write-ups", detail: "Postmortems and architecture decision records, mostly." },
-];
-
-/** Current focus. Kept short and updated by hand. */
-export const nowFocus = [
-  "Deepening backend fundamentals — Spring Boot, Express, MongoDB aggregation",
-  "Turning hackathon builds into production-grade repositories",
-  "Daily DSA practice",
-  "First open-source contributions",
 ];
