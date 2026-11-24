@@ -10,11 +10,11 @@ export const site = {
   wordmark: "JA",
   role: "Backend & Full-Stack Engineer",
   location: "Chennai, India",
-  url: "https://jaiaakash.xyz",
+  url: "https://www.jaiaakash.xyz",
   email: "jaiaakashs21@gmail.com",
   resumePath: "/JaiAakash_S_Resume.pdf",
   /** Short line used in <title>, OG and the JSON-LD description. */
-  tagline: "Computer Science student building backends and offline-first systems that keep working when the network does not.",
+  tagline: "Jai Aakash S is a computer science student in Chennai building event-driven systems with Java, Spring Boot, Kafka and FastAPI. Explore projects, engineering decisions and internship experience.",
   availability: "Open to Software / Backend Engineering internships",
 } as const;
 
@@ -26,9 +26,9 @@ export const links = {
 } as const;
 
 export const nav = [
-  { label: "About", href: "/#about", index: "01" },
-  { label: "Work", href: "/#work", index: "02" },
-  { label: "Stack", href: "/#stack", index: "03" },
+  { label: "Work", href: "/#work", index: "01" },
+  { label: "About", href: "/#about", index: "02" },
+  { label: "Toolkit", href: "/#stack", index: "03" },
   { label: "Experience", href: "/#experience", index: "04" },
   { label: "Contact", href: "/#contact", index: "05" },
 ] as const;

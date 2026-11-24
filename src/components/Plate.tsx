@@ -155,7 +155,7 @@ function IncidentPlate() {
           <text x={94 + i * 150} y="124" style={{ ...mono, fontSize: 11.5 }}
             fill={i === 2 ? S.accent : S.fg} textAnchor="middle">{s}</text>
           <text x={94 + i * 150} y="146" style={{ ...mono, fontSize: 11.5 }} fill={S.muted} textAnchor="middle">
-            {["10+ API", "LLM", "keyword", "draft"][i]}
+            {["REST API", "LLM", "keyword", "draft"][i]}
           </text>
           {i < 3 && (
             <path d={`M${156 + i * 150} 129 H${176 + i * 150}`} stroke={S.rule} strokeWidth="1.5" />
@@ -423,7 +423,25 @@ function TicketsPlate() {
   );
 }
 
+function WorkflowPlate({ label, steps }: { label: string; steps: string[] }) {
+  return (
+    <Frame label={label}>
+      <Tag x={42} y={64} accent>{label}</Tag>
+      <path d="M66 112v176" fill="none" stroke={S.accent} strokeWidth="2" />
+      {steps.map((step, i) => (
+        <g key={step} transform={`translate(0,${112 + i * 56})`}>
+          <circle cx="66" r="7" fill={S.accent} />
+          <rect x="94" y="-21" width="494" height="42" rx="4" fill="var(--bg)" stroke={S.rule} />
+          <text x="112" y="6" fill={S.fg} fontSize="17" fontFamily="var(--font-sans)">{step}</text>
+        </g>
+      ))}
+    </Frame>
+  );
+}
+
 const PLATES: Record<PlateKind, () => React.ReactElement> = {
+  delivery: () => <WorkflowPlate label="Webhook delivery" steps={["Accept event · HTTP 202", "Commit delivery and outbox · PostgreSQL", "Publish queued event · Kafka", "Sign webhook and record receiver response"]} />,
+  review: () => <WorkflowPlate label="Discharge follow-up" steps={["Receive discharge instruction", "Create task and match provider", "Hold flagged task for clinician review", "Release approved task and record audit event"]} />,
   sync: SyncPlate,
   grid: GridPlate,
   incident: IncidentPlate,

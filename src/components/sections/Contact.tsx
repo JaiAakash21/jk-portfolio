@@ -37,14 +37,13 @@ export default function Contact() {
       <div className="shell relative">
         <div className="tick-rule pt-6">
           <div className="flex items-baseline gap-4">
-            <span className="label label-accent tnum">05</span>
             <span className="label">Contact</span>
           </div>
         </div>
 
         <SplitReveal className="mt-10">
           <h2 id="contact-title" className="display text-[length:var(--text-h1)] leading-[0.95]">
-            Looking for an intern who sweats the <em>failure case</em>?
+            Get in <em>touch.</em>
           </h2>
         </SplitReveal>
 
@@ -111,7 +110,7 @@ export default function Contact() {
           {[
             { k: "GitHub", v: "JaiAakash21", href: links.github },
             { k: "LinkedIn", v: "jaiaakash21", href: links.linkedin },
-            { k: "LeetCode", v: "250+ solved", href: links.leetcode },
+            { k: "LeetCode", v: "Practice profile", href: links.leetcode },
           ].map((c) => (
             <a
               key={c.k}

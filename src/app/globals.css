@@ -19,7 +19,7 @@
   --font-mono:    var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
   /* ---- Fluid type scale ------------------------------------------------ */
-  --text-mono-xs:  0.6875rem;
+  --text-mono-xs:  0.78rem;
   --text-mono-sm:  0.75rem;
   --text-body:     1rem;
   --text-body-lg:  clamp(1.0625rem, 0.95rem + 0.5vw, 1.1875rem);
@@ -55,8 +55,8 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg:          #F2EEE6;
-  --bg-raised:   #EAE5DA;
+  --bg:          #F7F6F0;
+  --bg-raised:   #EFEFE7;
   --bg-sunken:   #E3DDD0;
   --fg:          #1A1815;
   --fg-muted:    #5F5A51;

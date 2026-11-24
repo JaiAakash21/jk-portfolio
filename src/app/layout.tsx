@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 import "./globals.css";
+import "./portfolio.css";
 import { site, links } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import SiteHeader from "@/components/SiteHeader";
@@ -103,7 +104,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <a href="#main" className="skip-link">Skip to content</a>
         <SmoothScroll />
-        <div className="grain" aria-hidden="true" />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

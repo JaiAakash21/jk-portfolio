@@ -41,7 +41,7 @@ export default function OpengraphImage() {
             {site.role}
           </div>
           <div style={{ display: "flex", marginTop: 14, fontSize: 27, color: MUTED, maxWidth: 820, lineHeight: 1.35 }}>
-            Offline-first storage, real-time state, and APIs that explain themselves.
+            Event-driven systems, durable webhooks and APIs built for recovery.
           </div>
         </div>
 
@@ -50,9 +50,9 @@ export default function OpengraphImage() {
           <span>·</span>
           <span>FastAPI</span>
           <span>·</span>
-          <span>Next.js</span>
+          <span>Spring Boot</span>
           <span>·</span>
-          <span>PyTorch</span>
+          <span>Kafka</span>
         </div>
       </div>
     ),
