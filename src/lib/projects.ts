@@ -281,6 +281,8 @@ export const projects: Project[] = [
     stack: ["React 19", "Vite", "Node.js", "Express", "Socket.IO", "chess.js", "Tailwind CSS", "Framer Motion"],
     plate: "board",
     repo: "https://github.com/JaiAakash21/CheckMate",
+    demo: "https://jai-checkmate-local.belovedbaton2.chatgpt.site/",
+    note: "The live demo supports two players on one device. Online multiplayer requires the Socket.IO server.",
     featured: false,
   },
   {
@@ -370,6 +372,8 @@ export const projects: Project[] = [
     stack: ["Python", "FastAPI", "React", "TypeScript", "Tailwind CSS"],
     plate: "rules",
     repo: "https://github.com/JaiAakash21/acentra-Goodfellas",
+    demo: "https://jaiaakash21.github.io/acentra-Goodfellas/",
+    note: "The live demo uses sample transactions in the browser. Live scoring and persistence require the FastAPI service.",
     featured: true,
   },
   {

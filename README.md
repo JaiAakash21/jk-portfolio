@@ -32,4 +32,10 @@ The GitHub Actions workflow runs installation, lint, type checking and a product
 - `src/components/DeliveryTrace.tsx` contains the illustrative replay of the recorded recovery test. It runs entirely in the browser.
 - `public/JaiAakash_S_Resume.pdf` is the résumé served by every download link.
 
+## Project demos
+
+- [CheckMate](https://jai-checkmate-local.belovedbaton2.chatgpt.site/) is a free, same-device two-player chess demo. The repository also contains the Socket.IO multiplayer application, which needs a running server.
+- [FraudLens](https://jaiaakash21.github.io/acentra-Goodfellas/) is a free, browser-hosted reviewer console using sample transactions. Live fraud scoring and persistence need its FastAPI service.
+- Case studies show a live demo only when a working public deployment exists. Projects that depend on unavailable credentials, datasets, or server infrastructure retain their source links without implying they are hosted.
+
 Licensed under the [MIT License](LICENSE).
