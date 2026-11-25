@@ -3,18 +3,18 @@
 /* ==========================================================================
    DESIGN SYSTEM — "Instrument"
    Warm ink + bone paper + ember signal.
-   Three-tier type: Instrument Serif (display) / Geist (text) / Geist Mono (data).
+   Three-tier type: Barlow Condensed (display) / Geist (text) / Geist Mono (data).
    ========================================================================== */
 
 @theme {
   /* ---- Colour: dark is the default theme ------------------------------- */
-  --color-ink:        #0E0D0C;  /* warm near-black page ground            */
+  --color-ink:        #121517;  /* warm near-black page ground            */
   --color-ink-raised: #15141200;/* placeholder, overridden below          */
-  --color-bone:       #EDE8E0;  /* warm off-white text                    */
-  --color-ember:      #E8663C;  /* the one accent                         */
+  --color-bone:       #f0f0e9;  /* warm off-white text                    */
+  --color-ember:      #ff995d;  /* the one accent                         */
   --color-sage:       #8FA89C;  /* cool counterpoint, diagrams only       */
 
-  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-barlow-condensed), var(--font-geist-sans), sans-serif;
   --font-sans:    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono:    var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
@@ -38,16 +38,16 @@
 :root,
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg:          #0E0D0C;
-  --bg-raised:   #151310;
-  --bg-sunken:   #080807;
-  --fg:          #EDE8E0;
-  --fg-muted:    #9A938A;
-  --fg-faint:    #8A847B;
+  --bg:          #121517;
+  --bg-raised:   #1c2022;
+  --bg-sunken:   #0c0f10;
+  --fg:          #f0f0e9;
+  --fg-muted:    #b3b7b5;
+  --fg-faint:    #a2a9a7;
   --rule:        rgb(237 232 224 / 0.13);
   --rule-strong: rgb(237 232 224 / 0.26);
-  --accent:      #E8663C;
-  --accent-ink:  #0E0D0C;
+  --accent:      #ff995d;
+  --accent-ink:  #121517;
   --sage:        #8FA89C;
   --grain:       0.035;
   --grain-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
@@ -55,15 +55,15 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg:          #F7F6F0;
-  --bg-raised:   #EFEFE7;
-  --bg-sunken:   #E3DDD0;
-  --fg:          #1A1815;
-  --fg-muted:    #5F5A51;
-  --fg-faint:    #655F54;
+  --bg:          #f3f3ef;
+  --bg-raised:   #e9ebe8;
+  --bg-sunken:   #dfe2de;
+  --fg:          #1a201f;
+  --fg-muted:    #505b57;
+  --fg-faint:    #58645e;
   --rule:        rgb(26 24 21 / 0.14);
   --rule-strong: rgb(26 24 21 / 0.3);
-  --accent:      #A8401B;
+  --accent:      #a33d16;
   --accent-ink:  #F8F5EF;
   --sage:        #5B7468;
   --grain:       0.022;
@@ -187,8 +187,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ---- Display type ------------------------------------------------------ */
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 0.92;
+  font-weight: 600;
+  line-height: 0.95;
   letter-spacing: -0.02em;
 }
 .display em { font-style: italic; color: var(--accent); }

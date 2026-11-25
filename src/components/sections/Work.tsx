@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProjectDrawing from "../ProjectDrawing";
 import { alsoBuilt, featuredProjects, otherProjects } from "@/lib/projects";
 
 export default function Work() {
@@ -9,6 +10,7 @@ export default function Work() {
         <div className="work-list">
           {featuredProjects.map((p) => (
             <Link className="work-entry" href={`/work/${p.slug}`} key={p.slug}>
+              <div className="work-art"><ProjectDrawing kind={p.plate} /></div>
               <div className="work-identity"><span className="project-kind">{p.kind}</span><h3>{p.title}</h3></div>
               <div className="work-context"><p>{p.summary}</p><span>{p.stack.slice(0, 4).join("  ·  ")}</span></div>
               <span className="read-case">Case study</span>

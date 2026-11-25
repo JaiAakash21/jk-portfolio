@@ -53,7 +53,7 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
   return (
     <article>
       {/* Header */}
-      <header className="ruled border-b border-rule pb-14 pt-28 md:pb-18 md:pt-36">
+      <header className="case-heading ruled border-b border-rule pb-14 pt-28 md:pb-18 md:pt-36">
         <div className="shell relative">
           <Link href="/#work" className="label hover-line inline-block hover:text-fg">
             ← Selected work

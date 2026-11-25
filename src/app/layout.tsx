@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif } from "next/font/google";
+import { Barlow_Condensed } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
@@ -11,12 +11,11 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ThemeScript from "@/components/ThemeScript";
 
-const instrument = Instrument_Serif({
+const display = Barlow_Condensed({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["600", "700"],
   display: "swap",
-  variable: "--font-instrument-serif",
+  variable: "--font-barlow-condensed",
 });
 
 export const metadata: Metadata = {
@@ -65,8 +64,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0E0D0C" },
-    { media: "(prefers-color-scheme: light)", color: "#F2EEE6" },
+    { media: "(prefers-color-scheme: dark)", color: "#121517" },
+    { media: "(prefers-color-scheme: light)", color: "#F3F3EF" },
   ],
   colorScheme: "dark light",
 };
@@ -93,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${instrument.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${display.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>
         <ThemeScript />
