@@ -4,13 +4,13 @@ import { achievements, degree, internships } from "@/lib/profile";
 
 export default function Experience() {
   return (
-    <section id="experience" className="section border-t border-rule" aria-labelledby="exp-title">
+    <section id="experience" className="section career border-t border-rule" aria-labelledby="exp-title">
       <div className="shell">
         <SectionHead id="exp-title" title="Experience" />
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
           <div>
             <h3 className="label border-b border-rule pb-3">Internships</h3>
-            <ol className="divide-y divide-rule">
+            <ol className="career-track">
               {internships.map((role) => (
                 <li key={role.title} className="py-6">
                   <p className="text-sm text-fg-muted">{role.period}</p>
@@ -25,7 +25,7 @@ export default function Experience() {
             </ol>
           </div>
 
-          <div className="space-y-9">
+          <div className="career-aside space-y-9">
             <div>
               <h3 className="label border-b border-rule pb-3">Education</h3>
               <h4 className="mt-4 text-lg font-medium">{degree.title}</h4>

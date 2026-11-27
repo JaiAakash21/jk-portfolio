@@ -38,8 +38,10 @@ The GitHub Actions workflow runs installation, lint, type checking and a product
 - [FraudLens](https://jaiaakash21.github.io/acentra-Goodfellas/) is a free, browser-hosted reviewer console using sample transactions. Live fraud scoring and persistence need its FastAPI service.
 - Case studies show a live demo only when a working public deployment exists. Projects that depend on unavailable credentials, datasets, or server infrastructure retain their source links without implying they are hosted.
 
+## Visual design
+
+The desktop masthead pairs Jai’s introduction with the interactive RelayForge assembly. Featured projects and archive entries expose available demos directly. Case studies pair each project summary with its system drawing and open the narrative with Jai’s contribution.
+
+The copper monogram introduces the biography. A toolkit register connects technologies to RelayForge, and a timeline presents the internships alongside education and awards. The contact band groups email, copy and résumé actions. The footer holds site navigation and external profiles.
+
 Licensed under the [MIT License](LICENSE).
-
-The homepage pairs a paper masthead with a graphite panel for the interactive RelayForge replay. The selected work layout gives the lead project a full-height illustration and stacks the remaining entries alongside it on desktop.
-
-The About section pairs a copper monogram print with short project notes. The footer groups navigation and contact links beneath a large signature on tablet and mobile.
