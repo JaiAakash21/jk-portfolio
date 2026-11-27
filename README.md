@@ -39,3 +39,5 @@ The GitHub Actions workflow runs installation, lint, type checking and a product
 - Case studies show a live demo only when a working public deployment exists. Projects that depend on unavailable credentials, datasets, or server infrastructure retain their source links without implying they are hosted.
 
 Licensed under the [MIT License](LICENSE).
+
+The homepage pairs a paper masthead with a graphite panel for the interactive RelayForge replay. The selected work layout gives the lead project a full-height illustration and stacks the remaining entries alongside it on desktop.
