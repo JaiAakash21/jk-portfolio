@@ -44,4 +44,6 @@ The desktop masthead pairs Jai’s introduction with the interactive RelayForge 
 
 The copper monogram introduces the biography. A toolkit register connects technologies to RelayForge, and a timeline presents the internships alongside education and awards. The contact band groups email, copy and résumé actions. The footer holds site navigation and external profiles.
 
+Scrolling changes the perspective of the RelayForge assembly, inks the featured project schematics from left to right and traces the internship timeline. These effects use native CSS view timelines. Reduced-motion settings and browsers without view timeline support get the complete static drawings and the same controls.
+
 Licensed under the [MIT License](LICENSE).

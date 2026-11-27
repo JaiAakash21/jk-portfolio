@@ -388,3 +388,49 @@ section[id] { scroll-margin-top: 5rem; }
   .tool-layout { grid-template-columns: 1fr; }
   .tool-register > div { grid-template-columns: 1fr; gap: .65rem; }
 }
+
+/* Native view timelines tie the assembly, drawings and career rule to page travel. */
+@supports (animation-timeline: view()) and (animation-range: entry 0% cover 48%) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Clip the full-bleed artwork while keeping the viewport as its scroll source. */
+    .hero-stage { overflow: clip; }
+    .trace-panel { view-timeline-name: --assembly; }
+    .trace-object {
+      animation: assembly-travel 1s linear both;
+      animation-timeline: --assembly;
+      animation-range: entry 0% exit 100%;
+    }
+    .work-entry { view-timeline-name: --draft; }
+    .drawing-aperture, .drawing-cursor {
+      animation: draft-reveal 1s linear both;
+      animation-timeline: --draft;
+      animation-range: entry 0% cover 48%;
+    }
+    .drawing-aperture { transform-origin: 0 0; }
+    .drawing-cursor { animation-name: draft-cursor; }
+    .career-track { position: relative; view-timeline-name: --career; }
+    .career-track::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -1px;
+      width: 2px;
+      background: var(--accent);
+      transform-origin: top;
+      animation: career-rule 1s linear both;
+      animation-timeline: --career;
+      animation-range: cover 20% cover 75%;
+    }
+  }
+}
+@keyframes assembly-travel {
+  from { transform: perspective(850px) rotateX(7deg) rotateY(-5deg) translateY(.65rem) scale(.94); }
+  48% { transform: perspective(850px) rotateX(0) rotateY(0) translateY(0) scale(1); }
+  to { transform: perspective(850px) rotateX(-6deg) rotateY(4deg) translateY(-.65rem) scale(1.04); }
+}
+@keyframes draft-reveal { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes draft-cursor {
+  from { transform: translateX(0); opacity: 0; }
+  5%, 95% { opacity: .85; }
+  to { transform: translateX(300px); opacity: 0; }
+}
+@keyframes career-rule { from { transform: scaleY(0); } to { transform: scaleY(1); } }
