@@ -296,3 +296,23 @@ section[id] { scroll-margin-top: 5rem; }
 [data-theme=dark] .hero-stage :is(.intro-role,.intro-summary,.intro-availability) { color: #d2d7cb; }
 [data-theme=dark] .intro-period { color: #ffa063; }
 [data-theme=dark] .trace-panel { box-shadow: .5rem .5rem 0 #414a44; }
+
+.bio-spread { display:grid; grid-template-columns:minmax(12rem,.72fr) minmax(0,1.28fr); gap:clamp(1.5rem,6vw,6rem); align-items:stretch; }
+.bio-print { position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(1rem,3vw,2.8rem); color:#201f1a; background:#ed9d66; }
+.bio-print::before { content:""; position:absolute; z-index:-1; width:110%; aspect-ratio:1; right:-54%; top:8%; border-radius:50%; background:repeating-radial-gradient(circle,#703c2638 0 1px,transparent 2px 9px); }
+.bio-print h2,.bio-location { font:600 .82rem/1.5 var(--font-mono); letter-spacing:.07em; text-transform:uppercase; }
+.bio-monogram { align-self:center; font-size:clamp(7rem,17vw,16rem); letter-spacing:-.065em; line-height:1; transform:skewY(-7deg); text-shadow:2px 2px #ed9d66,4px 4px #603d2c; }
+.bio-location { border-top:1px solid currentColor; padding-top:.5rem; }
+.bio-lead { font-size:clamp(2.7rem,5vw,5rem); line-height:.98; max-width:17ch; margin-bottom:1rem; }
+.bio-story > p + p,.bio-story dd { color:var(--fg-muted); line-height:1.55; }
+.bio-story dl { margin:1.4rem 0; }
+.bio-story dl div { display:grid; grid-template-columns:6.5rem 1fr; gap:1rem; padding:.8rem 0; border-top:1px solid var(--rule-strong); }
+.bio-story dt { font-weight:650; }
+.folio-end { border-top:4px solid var(--accent); background:var(--bg-sunken); }
+.folio-directory { display:grid; grid-template-columns:1fr 1.35fr; gap:2rem clamp(1.25rem,5vw,5rem); }
+.folio-signature { grid-column:1/-1; padding-bottom:1.4rem; border-bottom:1px solid var(--rule-strong); }
+.folio-name { display:inline-block; font-size:clamp(4rem,12vw,12rem); line-height:.88; letter-spacing:-.045em; }
+.folio-links li { border-bottom:1px solid var(--rule); }
+.folio-links a { display:block; padding-block:.65rem; overflow-wrap:anywhere; }
+@media(min-width:65rem){ .folio-directory { grid-template-columns:2.2fr .7fr 1fr; } .folio-signature { grid-column:auto; border:0; } .folio-name { font-size:clamp(5rem,8vw,9rem); } }
+@media(max-width:37rem){ .bio-spread { grid-template-columns:1fr; } .bio-print { min-height:10rem; } .bio-monogram { position:absolute; right:1.5rem; top:50%; transform:translateY(-50%) skewY(-7deg); } .bio-location { width:fit-content; } .bio-story dl div { grid-template-columns:1fr; gap:.25rem; } }

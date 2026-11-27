@@ -11,22 +11,20 @@ export default function SiteFooter() {
   };
 
   return (
-    <footer className="border-t border-rule bg-bg-sunken">
+    <footer className="folio-end">
       <div className="shell py-14 md:py-20">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <Link href="/" className="display block text-[clamp(2.25rem,5vw,3.25rem)] leading-none">
+        <div className="folio-directory">
+          <div className="folio-signature">
+            <Link href="/" className="display folio-name">
               Jai Aakash<span className="text-accent">.</span>
             </Link>
             <p className="mt-4 max-w-[30ch] text-[0.9375rem] text-fg-muted">
               {site.role} · {site.location}
             </p>
-            <p className="label mt-8 max-w-[34ch] leading-relaxed">
-              Consistency beats intensity. Build every day, improve every day.
-            </p>
+
           </div>
 
-          <nav aria-label="Footer" className="md:col-span-3">
+          <nav aria-label="Footer" className="folio-links">
             <h2 className="label mb-5">Index</h2>
             <ul className="space-y-1">
               {nav.map((n) => (
@@ -39,7 +37,7 @@ export default function SiteFooter() {
             </ul>
           </nav>
 
-          <div className="md:col-span-4">
+          <div className="folio-links">
             <h2 className="label mb-5">Elsewhere</h2>
             <ul className="space-y-1">
               {[
@@ -83,3 +81,4 @@ export default function SiteFooter() {
     </footer>
   );
 }
+

@@ -2,13 +2,21 @@ import { site } from "@/lib/site";
 
 export default function About() {
   return (
-    <section id="about" className="section profile-section" aria-labelledby="about-title">
-      <div className="shell profile-layout">
-        <h2 className="display" id="about-title">About me</h2>
-        <div>
-          <p>I’m a Computer Science and Engineering student at Rajalakshmi Engineering College in Chennai. I work mostly in Java and Python.</p>
-          <p>At Zenvic I built APIs for incident analysis and a postmortem tool that retrieves similar outages. At the Acentra finals I worked on the handoff between software and a human reviewer, from explaining a fraud flag to holding a discharge task for a clinician.</p>
-          <a className="text-action" href={site.resumePath} download>Download my résumé</a>
+    <section id="about" className="section bio" aria-labelledby="about-title">
+      <div className="shell bio-spread">
+        <div className="bio-print">
+          <h2 id="about-title">About me</h2>
+          <span className="bio-monogram display" aria-hidden="true">JA</span>
+          <span className="bio-location">Chennai, India</span>
+        </div>
+        <div className="bio-story">
+          <p className="bio-lead display">My work starts with Java and Python.</p>
+          <p>I study Computer Science and Engineering at Rajalakshmi Engineering College in Chennai.</p>
+          <dl>
+            <div><dt>Zenvic</dt><dd>I built incident analysis APIs and a postmortem tool that retrieves similar outages.</dd></div>
+            <div><dt>Acentra finals</dt><dd>I worked on the handoff to human reviewers, from explaining a fraud flag to holding a discharge task for a clinician.</dd></div>
+          </dl>
+          <a className="text-action" href={site.resumePath} download>Download my résumé <span aria-hidden="true">↓</span></a>
         </div>
       </div>
     </section>
