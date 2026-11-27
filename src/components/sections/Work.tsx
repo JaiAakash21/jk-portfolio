@@ -7,13 +7,24 @@ export default function Work() {
     <section id="work" className="work-section" aria-labelledby="work-title">
       <div className="shell">
         <div className="work-heading"><h2 id="work-title" className="display">Selected work</h2><span>Engineering case studies</span></div>
-        <div className="work-list">
+        <div className="cover-stack">
           {featuredProjects.map((p) => (
-            <article className="work-entry" key={p.slug}>
-              <div className="work-art"><ProjectDrawing kind={p.plate} /></div>
-              <div className="work-identity"><span className="project-kind">{p.kind}</span><h3>{p.title}</h3></div>
-              <div className="work-context"><p>{p.summary}</p><span>{p.stack.slice(0, 4).join("  ·  ")}</span></div>
-              <div className="work-actions"><Link className="read-case" href={`/work/${p.slug}`}>Case study <span aria-hidden="true">→</span></Link>{p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer">Live demo ↗</a>}</div>
+            <article className="project-cover" data-plate={p.plate} key={p.slug}>
+              <div className="cover-copy">
+                <p className="cover-kind">{p.kind}</p>
+                <h3 className="display">{p.title}</h3>
+                <p className="cover-summary">{p.summary}</p>
+                <p className="cover-stack-line">{p.stack.slice(0, 4).join(" · ")}</p>
+                <div className="cover-links">
+                  <Link href={`/work/${p.slug}`} aria-label={`Read the ${p.title} case study`}>
+                    Case study <span aria-hidden="true">→</span>
+                  </Link>
+                  {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer">Live demo ↗</a>}
+                </div>
+              </div>
+              <div className="cover-illustration" aria-hidden="true">
+                <div className="cover-orbit"><ProjectDrawing kind={p.plate} /></div>
+              </div>
             </article>
           ))}
         </div>
